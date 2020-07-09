@@ -28,7 +28,18 @@ public class Nuts extends Products {
 
     @Override
     public String examine() {
-        return "Info: nr " + getProductId() + " " + getName() + " Declaration: " + getDescription() +
-                " Weight: " + getWeight () + " gram."+ use();
+        String info = getProductId() + ", Price: " + getPrice() + " Kr. -" + getName();
+
+        for (int i = 0; i < 20 - getName().length(); i++) {
+            info = info + " ";
+        }
+        info = info + "Weight: " + getWeight() + " g.  " + getDescription();
+        if (isSalted()) {
+            info = info + " Salted. ";
+        } else {
+            info = info + " NO salt!";
+        }
+        info = info + use();
+        return info;
     }
 }

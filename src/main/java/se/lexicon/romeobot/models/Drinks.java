@@ -45,11 +45,22 @@ public class Drinks extends Products {
 
     @Override
     public String examine() {
-        return "Info: nr " + getProductId() + " " + getName() + " Declaration: " + getDescription() +
-                " sugar: " +getSugarPercent() + "% sugar." + use();
+        String info = getProductId() + ", Price: " +getPrice() +" Kr. -" + getName();
+        for (int i = 0; i < 20 - getName().length(); i++) {
+            info = info + " ";
+        }
+        info = info + "Volume: " + getVolume() + " cl.  " + getDescription();
+        if (isSugarFree()) {
+            info = info + " NO sugar!  ";
+        } else{
+            info = info + " " + getSugarPercent() + "% sugar. ";
+                    use();
+        }
+        info = info + use();
+        return info;
     }
     @Override
     String use(){
-        return " Drink it!";
+        return "Drink it!";
     }
 }
