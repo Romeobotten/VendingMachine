@@ -44,7 +44,7 @@ public class Drinks extends Products {
     }
 
     @Override
-    public String examine() {
+    public String examine() { // This is a job for StringBuilder
         String info = getProductId() + ", Price: " +getPrice() +" Kr. -" + getName();
         for (int i = 0; i < 20 - getName().length(); i++) {
             info = info + " ";
