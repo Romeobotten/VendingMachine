@@ -71,9 +71,9 @@ public class JunkFoodMachine implements VendingMachine {
             }
         }
         if (amount > 15){
-            System.out.println(amount + "? This bill is not valid:");
+            System.out.println(amount + " Kr? This bill is not valid:");
         } else{
-            System.out.println(amount + "? This coin is not valid:");
+            System.out.println(amount + " Kr? This coin is not valid:");
         }
     }
 
@@ -87,13 +87,17 @@ public class JunkFoodMachine implements VendingMachine {
                      depositPool = depositPool - productList[i].getPrice();
                      System.out.println("You bought " + productList[i].getName() + " for " +
                              productList[i].getPrice() + " Kr.");
-                     System.out.println("You have " + getBalance() + " Kr left.");
+                     System.out.println("You now have " + getBalance() + " Kr left.");
                      return productList[i];
                  } else {
-                     System.out.println(productList[i].getPrice() + "? You can not afford that.");
+                     System.out.println(productList[i].getName() + " for " + productList[i].getPrice() +
+                             " Kr? You can't afford that!");
+                     System.out.println("You have only " + getBalance() + " Kr left.");
+                     return productList[i];
                  }
              }
         }
+        System.out.println(productNumber + "? It is out of stock.");
         return null;
     }
 
