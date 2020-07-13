@@ -22,7 +22,7 @@ public class JunkFoodMachine implements VendingMachine {
         TJUGA, FEMTILAPP, HUNDRING, TVAHUNDRING, FEMHUNDRING, TUSENLAPP}
     int[] denominations2 = {ENKRONA, TVAKRONA, FEMMA, TIA,
             TJUGA, FEMTILAPP, HUNDRING, TVAHUNDRING, FEMHUNDRING, TUSENLAPP};
-    int depositPool = 0;
+    int depositPool;
 
     Products[] productList = createList();
 
@@ -143,7 +143,7 @@ public class JunkFoodMachine implements VendingMachine {
 
     @Override
     public int endSession() { // always returns 0?
-        int change = 0;
+        int change;
 
         if(getBalance() == 0){
             System.out.println("No change:");
@@ -187,9 +187,6 @@ public class JunkFoodMachine implements VendingMachine {
         String[] info = new String[productList.length];
         for (int i = 0; i < productList.length; i++) {
             info[i] = "Id nr: " + productList[i].getProductId() + "-" + productList[i].getName();
-            if(productList[i].getProductId() % 5 == 0){
-                info[i] = info[i] + "\n";
-            }
         }
         return info;
     }

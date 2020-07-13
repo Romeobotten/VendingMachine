@@ -3,14 +3,11 @@ package se.lexicon.romeobot.models;
 import junit.framework.TestCase;
 import org.junit.Test;
 import se.lexicon.romeobot.Data.ProductIdSequencer;
-
 /**
- * We are only going to do the basic tests, K I S S
  * Arrange
  * Act
  * Assert
  */
-
 public class ProductsTest extends TestCase {
 
     @Test
@@ -28,19 +25,19 @@ public class ProductsTest extends TestCase {
         assertEquals(101, colazero33.getProductId());
         assertEquals(103, colazero50.getProductId());
     }
+
     @Test
-    public void testTestGetAndSetName() {
+    public void testTestGetAndSetDescription() {
         // Arrange
         ProductIdSequencer.reset();
         // Act
         Products cola33 = new Drinks
                 ("Cola Can", "-Carbonated water, cola flavour, no fat.", 18, 33, 10);
-        String name1 = cola33.getName();
-        cola33.setName("Coke Can");
-        String name2 = cola33.getName();
+        String name1 = cola33.getDescription();
+        cola33.setDescription("-Carbonated water, coke flavour, no fat.");
+        String name2 = cola33.getDescription();
         // Assert
-        assertEquals("Cola Can", name1);
-        assertEquals("Coke Can", name2);
+        assertEquals("-Carbonated water, cola flavour, no fat.", name1);
+        assertEquals("-Carbonated water, coke flavour, no fat.", name2);
     }
-
 }

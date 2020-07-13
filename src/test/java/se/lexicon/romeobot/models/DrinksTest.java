@@ -3,23 +3,26 @@ package se.lexicon.romeobot.models;
 import junit.framework.TestCase;
 import org.junit.Test;
 import se.lexicon.romeobot.Data.ProductIdSequencer;
-
+/**
+ * Arrange
+ * Act
+ * Assert
+ */
 public class DrinksTest extends TestCase {
 
-    /**
-     public void testGetVolume() {
-     }
-
-     public void testSetVolume() {
-     // Arrange
-     ProductIdSequencer.reset();
-     // Act
-     Products cola33 = new Drinks
-     ("Cola Can", "-Carbonated water, cola flavour, no fat.", 18, 33, 10);
-
-     }
-
-     */
+    @Test
+    public void testGetVolume() {
+        // Arrange
+        ProductIdSequencer.reset();
+        // Act
+        Drinks cola33 = new Drinks
+                ("Cola Can", "-Carbonated water, cola flavour, no fat.", 18, 33, 10);
+        int before = cola33.getVolume();
+        cola33.setVolume(150);
+        // Assert
+        assertEquals(33, before);
+        assertEquals(150, cola33.getVolume());
+    }
 
     @Test
     public void testSetAndGetName() {
@@ -36,7 +39,7 @@ public class DrinksTest extends TestCase {
         assertEquals("Coke Can", name2);
     }
 
-        @Test
+    @Test
     public void testExamine() {
         // Arrange
         ProductIdSequencer.reset();
@@ -55,4 +58,3 @@ public class DrinksTest extends TestCase {
                 "-Carbonated water, cola flavour, no fat. NO sugar!  Drink it!", productList[3].examine());
     }
 }
-

@@ -3,8 +3,27 @@ package se.lexicon.romeobot.models;
 import junit.framework.TestCase;
 import org.junit.Test;
 import se.lexicon.romeobot.Data.ProductIdSequencer;
-
+/**
+ * Arrange
+ * Act
+ * Assert
+ */
 public class NutsTest extends TestCase {
+
+    @Test
+    public void testSetAndGetWeight() {
+        // Arrange
+        ProductIdSequencer.reset();
+        // Act
+        Nuts walnut150 = new Nuts
+                ("Walnuts Sm Natural", "-60% fat, 15% carbon hydrates, 15% protein.",
+                        24, 150, false);
+        int before = walnut150.getWeight();
+        walnut150.setWeight(250);
+        // Assert
+        assertEquals(150, before);
+        assertEquals(250, walnut150.getWeight());
+    }
 
     @Test
     public void testSetAndGetName() {
@@ -21,7 +40,6 @@ public class NutsTest extends TestCase {
 
     @Test
     public void testExamine() {
-
         // Arrange
         ProductIdSequencer.reset();
         // Act
@@ -34,7 +52,7 @@ public class NutsTest extends TestCase {
         Products cashew500 = new Nuts
                 ("Cashewnuts Big", "-50% fat, 25% carbon hydrates, 20% protein.",
                         45, 500, true);
-        // Assertq
+        // Assert
         assertEquals("103, Price: 45 Kr. -Cashewnuts Big      Weight: 500 g.  -50% fat, 25% carbon hydrates, 20% protein. Salted.  Eat it!", cashew500.examine());
     }
 }

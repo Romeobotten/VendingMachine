@@ -3,8 +3,27 @@ package se.lexicon.romeobot.models;
 import junit.framework.TestCase;
 import org.junit.Test;
 import se.lexicon.romeobot.Data.ProductIdSequencer;
-
+/**
+ * Arrange
+ * Act
+ * Assert
+ */
 public class ChocolateBarsTest extends TestCase {
+
+    @Test
+    public void testSetAndGetWeight() {
+        // Arrange
+        ProductIdSequencer.reset();
+        // Act
+        ChocolateBars snickers200 = new ChocolateBars // Cheating to get it to work
+                ("Snickers Big", "-28% fat, 45% sugar, 22% peanuts. Chocolate-",
+                        18, 200, 22);
+        int before = snickers200.getWeight();
+        snickers200.setWeight(100);
+        // Assert
+        assertEquals(200, before);
+        assertEquals(100, snickers200.getWeight());
+    }
 
     @Test
     public void testSetAndGetName() {
@@ -21,7 +40,6 @@ public class ChocolateBarsTest extends TestCase {
 
     @Test
     public void testExamine() {
-
         // Arrange
         ProductIdSequencer.reset();
         // Act
