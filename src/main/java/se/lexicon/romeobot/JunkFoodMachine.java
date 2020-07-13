@@ -1,20 +1,27 @@
 package se.lexicon.romeobot;
 
+import se.lexicon.romeobot.models.ChocolateBars;
 import se.lexicon.romeobot.models.Drinks;
 import se.lexicon.romeobot.models.Nuts;
 import se.lexicon.romeobot.models.Products;
 
 public class JunkFoodMachine implements VendingMachine {
 
-    final int FEMTILAPP = 50;
-    final int HUNDRING = 100;
-    final int FEMHUNDRING = 500;
-    public enum DENOMINATIONS {FEMTILAPP, HUNDRING, FEMHUNDRING}
+    private final int ENKRONA = (1);
+    private final int TVAKRONA = (2);
+    private final int FEMMA = (5);
+    private final int TIA = (10);
+    private final int TJUGA = (20);
+    private final int FEMTILAPP = (50);
+    private final int HUNDRING = (100);
+    private final int TVAHUNDRING = (200);
+    private final int FEMHUNDRING = (500);
+    private final int TUSENLAPP = (1000);
 
-    // ENKRONA(1) = ,TVAKRONA(2) ,FEMMA(5) ,TIA(10), TJUGA(20),
-    // FEMTILAPP(50), HUNDRING(100), TVAHUNDRING(200), FEMHUNDRING(500), TUSENLAPP(1000)
-
-    int[] denominations2 = {1, 2, 5, 10, 20, 50, 100, 200, 500, 1000};
+    public enum DENOMINATIONS {ENKRONA, TVAKRONA, FEMMA, TIA,
+        TJUGA, FEMTILAPP, HUNDRING, TVAHUNDRING, FEMHUNDRING, TUSENLAPP}
+    int[] denominations2 = {ENKRONA, TVAKRONA, FEMMA, TIA,
+            TJUGA, FEMTILAPP, HUNDRING, TVAHUNDRING, FEMHUNDRING, TUSENLAPP};
     int depositPool = 0;
 
     Products[] productList = createList();
@@ -22,34 +29,67 @@ public class JunkFoodMachine implements VendingMachine {
     public Products[] createList() {
 
         Products cola33 = new Drinks
-                ("Cola Can", "-Carbonated water, cola flavour, no fat.", 18, 33, 10);
+                ("Cola Can", "-Carbonated water, cola flavour, no fat.",
+                        18, 33, 10);
         Products colazero33 = new Drinks
-                ("Cola Zero Can", "-Carbonated water, cola flavour, no fat.", 18, 33, 0);
+                ("Cola Zero Can", "-Carbonated water, cola flavour, no fat.",
+                        18, 33, 0);
         Products cola50 = new Drinks
-                ("Cola Bottle", "-Carbonated water, cola flavour, no fat.", 22, 50, 10);
+                ("Cola Bottle", "-Carbonated water, cola flavour, no fat.",
+                        22, 50, 10);
         Products colazero50 = new Drinks
-                ("Cola Zero Bottle", "-Carbonated water, cola flavour, no fat.", 22, 50, 0);
+                ("Cola Zero Bottle", "-Carbonated water, cola flavour, no fat.",
+                        22, 50, 0);
         Products pepsi33 = new Drinks
-                ("Pepsi Can", "-Carbonated water, cola flavour, no fat.", 16, 33, 11);
+                ("Pepsi Can", "-Carbonated water, cola flavour, no fat.",
+                        16, 33, 11);
         Products pepsimax33 = new Drinks
-                ("Pepsi Max Can", "-Carbonated water, cola flavour, no fat.", 16, 33, 0);
+                ("Pepsi Max Can", "-Carbonated water, cola flavour, no fat.",
+                        16, 33, 0);
         Products fanta50 = new Drinks
-                ("Fanta Bottle", "-Carbonated water, orange flavour, no fat.", 22, 50, 12);
+                ("Fanta Bottle", "-Carbonated water, orange flavour, no fat.",
+                        22, 50, 12);
         Products peanuts150 = new Nuts
-                ("Peanuts Small", "-50% fat, 20% carbon hydrates, 25% protein.", 10, 150, true);
+                ("Peanuts Small", "-50% fat, 20% carbon hydrates, 25% protein.",
+                        10, 150, true);
         Products cashew150 = new Nuts
-                ("Cashewnuts Small", "-50% fat, 25% carbon hydrates, 20% protein.", 18, 150, true);
+                ("Cashewnuts Small", "-50% fat, 25% carbon hydrates, 20% protein.",
+                        18, 150, true);
         Products cashew150natural = new Nuts
-                ("Cashewnuts Sm Nat", "-50% fat, 25% carbon hydrates, 20% protein.", 19, 150, false);
+                ("Cashewnuts Sm Nat", "-50% fat, 25% carbon hydrates, 20% protein.",
+                        19, 150, false);
         Products walnut150 = new Nuts
-                ("Walnuts Sm Natural", "-60% fat, 15% carbon hydrates, 15% protein.", 24, 150, false);
+                ("Walnuts Sm Natural", "-60% fat, 15% carbon hydrates, 15% protein.",
+                        24, 150, false);
         Products peanuts500 = new Nuts
-                ("Peanuts Big", "-50% fat, 20% carbon hydrates, 25% protein.", 20, 500, true);
+                ("Peanuts Big", "-50% fat, 20% carbon hydrates, 25% protein.",
+                        20, 500, true);
         Products cashew500 = new Nuts
-                ("Cashewnuts Big", "-50% fat, 25% carbon hydrates, 20% protein.", 45, 500, true);
+                ("Cashewnuts Big", "-50% fat, 25% carbon hydrates, 20% protein.",
+                        45, 500, true);
+        Products twix60 = new ChocolateBars
+                ("Twix Small", "-25% fat, 50% sugar, 20% coconut. Chocolate-",
+                        10, 60,25);
+        Products twix200 = new ChocolateBars
+                ("Twix Big", "-25% fat, 50% sugar, 20% coconut. Chocolate-",
+                        18, 200, 25);
+        Products snickers60 = new ChocolateBars
+                ("Snickers Small", "-28% fat, 45% sugar, 22% peanuts. Chocolate-",
+                        10, 60,22);
+        Products snickers200 = new ChocolateBars
+                ("Snickers Big", "-28% fat, 45% sugar, 22% peanuts. Chocolate-",
+                        18, 200, 22);
+        Products mars60 = new ChocolateBars
+                ("Mars Small", "-22% fat, 55% sugar, 18% caramel. Chocolate-",
+                        10, 60,28);
+        Products mars200 = new ChocolateBars
+                ("Mars Big", "-22% fat, 55% sugar, 18% caramel. Chocolate-",
+                        18, 200, 28);
 
-        Products[] productList = new Products[]{cola33, colazero33, cola50, colazero50, pepsi33, pepsimax33,
-                fanta50, peanuts150, cashew150, cashew150natural, walnut150, peanuts500, cashew500};
+        Products[] productList = new Products[]
+                {cola33, colazero33, cola50, colazero50, pepsi33, pepsimax33, fanta50,
+                peanuts150, cashew150, cashew150natural, walnut150, peanuts500, cashew500,
+                twix60, twix200, snickers60, snickers200, mars60, mars200};
         return productList;
     }
 
@@ -105,6 +145,9 @@ public class JunkFoodMachine implements VendingMachine {
     public int endSession() { // always returns 0?
         int change = 0;
 
+        if(getBalance() == 0){
+            System.out.println("No change:");
+        }
         for (int i = denominations2.length - 1; i >= 0; i--) {
             change = getBalance() / denominations2[i];
             depositPool = (getBalance() % denominations2[i]);
@@ -126,6 +169,11 @@ public class JunkFoodMachine implements VendingMachine {
 
     @Override
     public String getDescription(int productNumber) {
+        for (int i = 0; i < productList.length; i++) {
+            if(productList[i].getProductId() == productNumber){
+                return productList[i].getDescription();
+            }
+        }
         return null;
     }
 

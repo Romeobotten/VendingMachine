@@ -1,6 +1,7 @@
 package se.lexicon.romeobot;
 
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class App {
 
@@ -8,56 +9,67 @@ public class App {
 
         JunkFoodMachine myMachine = new JunkFoodMachine();
 
-        int randomInt = (int)(Math.pow(10, (int)(Math.random() * 3))) * (int)(Math.random() * 5 + 1);
-
-        System.out.println("Insert amount " + " kr.");
-        myMachine.addCurrency(randomInt);
-        myMachine.printList(myMachine.productList);
-        myMachine.addCurrency(randomInt);
-        System.out.println("You have " + myMachine.getBalance() + " kr left.");
-
-        myMachine.request(101);
-        myMachine.printList(myMachine.productList);
-        myMachine.request(107);
-
-
-
-        myMachine.addCurrency(randomInt);
-        myMachine.request(111);
-        myMachine.request(103);
-
-        myMachine.addCurrency(12);
-        myMachine.addCurrency(50);
-        System.out.println("You have " + myMachine.getBalance() + " kr left.");
-
-        System.out.println(Arrays.toString(myMachine.getProducts()));
-        myMachine.request(113);
-        myMachine.request(102);
-        myMachine.addCurrency(1000);
-        myMachine.request(123);
-        myMachine.request(113);
-        myMachine.request(106);
-        myMachine.request(101);
-
-        myMachine.endSession();
-
         System.out.println(Arrays.toString(myMachine.getProducts()));
 
-        for (int i = 0; i < 3; i++) {
-            randomInt = (int)(Math.pow(10, (int)(Math.random() * 3))) * (int)(Math.random() * 5 + 1);
-            myMachine.addCurrency(randomInt);
-            myMachine.addCurrency(randomInt);
-        }
+        int randomInt = (int) (Math.pow(10, (int) (Math.random() * 3))) * (int) (Math.random() * 5 + 1);
+        myMachine.addCurrency(randomInt);
+
+        randomInt = (int) (Math.pow(10, (int) (Math.random() * 3))) * (int) (Math.random() * 5 + 1);
+        myMachine.addCurrency(randomInt);
+        myMachine.addCurrency(randomInt);
+
+        randomInt = (int) (Math.pow(10, (int) (Math.random() * 3))) * (int) (Math.random() * 5 + 1);
+        myMachine.addCurrency(randomInt);
+        myMachine.addCurrency(randomInt);
+
         myMachine.printList(myMachine.productList);
 
         for (int i = 0; i < myMachine.productList.length; i++) {
             myMachine.request(myMachine.productList[i].getProductId());
-            myMachine.request((int)(Math.random()*20 + 100));
-            if (myMachine.getBalance() < 20){
-                randomInt = (int)(Math.pow(10, (int)(Math.random() * 3))) * (int)(Math.random() * 5 + 1);
+            myMachine.request((int) (Math.random() * 22 + 100));
+            if (myMachine.getBalance() < 20) {
+                randomInt = (int) (Math.pow(10, (int) (Math.random() * 3))) * (int) (Math.random() * 5 + 1);
                 myMachine.addCurrency(randomInt);
             }
         }
-        myMachine.endSession();
+        myMachine.endSession(); // End of auto part
+
+        Scanner reader = new Scanner(System.in);
+        String input;
+        int inputNr;
+
+        while (true) {
+            System.out.println("Welcome to my Junkfood Machine!");
+            System.out.println("Enter q to quit, or an Id number to buy things.");
+            System.out.print("Enter a number to insert coins and bills. Enter 0 to see the products.");
+            System.out.println("These coins and bills are valid.");
+            for (JunkFoodMachine.DENOMINATIONS kr : JunkFoodMachine.DENOMINATIONS.values())
+                System.out.print(kr + ", ");
+
+            System.out.println("\nInsert amount or Id number: ");
+            input = reader.nextLine();  // Reading a number
+
+            if (input.equalsIgnoreCase("q")) { // Want to quit?
+                myMachine.endSession();
+                System.out.println("Thank you and goodbye!");
+                break; // Program ends if input is q
+            }
+            inputNr = Integer.parseInt(input); // Throw Exeption here?
+
+            if (inputNr < 1 || inputNr > 1000) {
+                if (inputNr == 0) {
+                    myMachine.printList(myMachine.productList);
+                } else {
+                    System.out.println("I can't accept that.");
+                }
+            } else {
+                if (inputNr > 100 && inputNr < 200) {
+                    myMachine.request(inputNr);
+                } else {
+                    myMachine.addCurrency(inputNr);
+                }
+            }
+        }
     }
 }
+

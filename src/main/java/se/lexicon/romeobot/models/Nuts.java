@@ -11,7 +11,7 @@ public class Nuts extends Products {
     }
 
     public int getWeight() {
-        return weight;
+        return this.weight;
     }
 
     public void setWeight(int weight) {
