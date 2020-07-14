@@ -5,6 +5,8 @@ import se.lexicon.romeobot.models.Drinks;
 import se.lexicon.romeobot.models.Nuts;
 import se.lexicon.romeobot.models.Products;
 
+import java.util.Arrays;
+
 public class JunkFoodMachine implements VendingMachine {
 
     private final int ENKRONA = (1);
@@ -18,12 +20,9 @@ public class JunkFoodMachine implements VendingMachine {
     private final int FEMHUNDRING = (500);
     private final int TUSENLAPP = (1000);
 
-    public enum DENOMINATIONS {ENKRONA, TVAKRONA, FEMMA, TIA,
-        TJUGA, FEMTILAPP, HUNDRING, TVAHUNDRING, FEMHUNDRING, TUSENLAPP}
     int[] denominations2 = {ENKRONA, TVAKRONA, FEMMA, TIA,
             TJUGA, FEMTILAPP, HUNDRING, TVAHUNDRING, FEMHUNDRING, TUSENLAPP};
     int depositPool;
-
     Products[] productList = createList();
 
     public Products[] createList() {
@@ -69,27 +68,27 @@ public class JunkFoodMachine implements VendingMachine {
                         45, 500, true);
         Products twix60 = new ChocolateBars
                 ("Twix Small", "-25% fat, 50% sugar, 20% coconut. Chocolate-",
-                        10, 60,25);
+                        10, 60, 25);
         Products twix200 = new ChocolateBars
                 ("Twix Big", "-25% fat, 50% sugar, 20% coconut. Chocolate-",
                         18, 200, 25);
         Products snickers60 = new ChocolateBars
                 ("Snickers Small", "-28% fat, 45% sugar, 22% peanuts. Chocolate-",
-                        10, 60,22);
+                        10, 60, 22);
         Products snickers200 = new ChocolateBars
                 ("Snickers Big", "-28% fat, 45% sugar, 22% peanuts. Chocolate-",
                         18, 200, 22);
         Products mars60 = new ChocolateBars
                 ("Mars Small", "-22% fat, 55% sugar, 18% caramel. Chocolate-",
-                        10, 60,28);
+                        10, 60, 28);
         Products mars200 = new ChocolateBars
                 ("Mars Big", "-22% fat, 55% sugar, 18% caramel. Chocolate-",
                         18, 200, 28);
 
         Products[] productList = new Products[]
                 {cola33, colazero33, cola50, colazero50, pepsi33, pepsimax33, fanta50,
-                peanuts150, cashew150, cashew150natural, walnut150, peanuts500, cashew500,
-                twix60, twix200, snickers60, snickers200, mars60, mars200};
+                        peanuts150, cashew150, cashew150natural, walnut150, peanuts500, cashew500,
+                        twix60, twix200, snickers60, snickers200, mars60, mars200};
         return productList;
     }
 
@@ -110,9 +109,9 @@ public class JunkFoodMachine implements VendingMachine {
                 return;
             }
         }
-        if (amount > 15){
+        if (amount > 15) {
             System.out.println(amount + " Kr? This bill is not valid:");
-        } else{
+        } else {
             System.out.println(amount + " Kr? This coin is not valid:");
         }
     }
@@ -122,20 +121,20 @@ public class JunkFoodMachine implements VendingMachine {
 
         for (int i = 0; i < productList.length; i++) {
 
-             if(productNumber ==  productList[i].getProductId()) {
-                 if(productList[i].getPrice() <= getBalance()){
-                     depositPool = depositPool - productList[i].getPrice();
-                     System.out.println("You bought " + productList[i].getName() + " for " +
-                             productList[i].getPrice() + " Kr.");
-                     System.out.println("You now have " + getBalance() + " Kr left.");
-                     return productList[i];
-                 } else {
-                     System.out.println(productList[i].getName() + " for " + productList[i].getPrice() +
-                             " Kr? You can't afford that!");
-                     System.out.println("You have only " + getBalance() + " Kr left.");
-                     return productList[i];
-                 }
-             }
+            if (productNumber == productList[i].getProductId()) {
+                if (productList[i].getPrice() <= getBalance()) {
+                    depositPool = depositPool - productList[i].getPrice();
+                    System.out.println("You bought " + productList[i].getName() + " for " +
+                            productList[i].getPrice() + " Kr.");
+                    System.out.println("You now have " + getBalance() + " Kr left.");
+                    return productList[i];
+                } else {
+                    System.out.println(productList[i].getName() + " for " + productList[i].getPrice() +
+                            " Kr? You can't afford that!");
+                    System.out.println("You have only " + getBalance() + " Kr left.");
+                    return productList[i];
+                }
+            }
         }
         System.out.println(productNumber + "? It is out of stock.");
         return null;
@@ -145,22 +144,22 @@ public class JunkFoodMachine implements VendingMachine {
     public int endSession() { // always returns 0?
         int change;
 
-        if(getBalance() == 0){
+        if (getBalance() == 0) {
             System.out.println("No change:");
         }
         for (int i = denominations2.length - 1; i >= 0; i--) {
             change = getBalance() / denominations2[i];
             depositPool = (getBalance() % denominations2[i]);
 
-            if (change > 0){
+            if (change > 0) {
                 System.out.print("Change returned: " + change + " x " + denominations2[i]);
-                if(i > 3){
+                if (i > 3) {
                     System.out.println(" bill");
                 } else {
                     System.out.println(" coin");
                 }
             }
-            if (depositPool == 0){
+            if (depositPool == 0) {
                 return depositPool;
             }
         }
@@ -170,7 +169,7 @@ public class JunkFoodMachine implements VendingMachine {
     @Override
     public String getDescription(int productNumber) {
         for (int i = 0; i < productList.length; i++) {
-            if(productList[i].getProductId() == productNumber){
+            if (productList[i].getProductId() == productNumber) {
                 return productList[i].getDescription();
             }
         }
@@ -189,5 +188,47 @@ public class JunkFoodMachine implements VendingMachine {
             info[i] = "Id nr: " + productList[i].getProductId() + "-" + productList[i].getName();
         }
         return info;
+    }
+
+    public String[] getProducts(char productType) {
+        //int arrayLength = 0;
+        String[] info = new String[0];
+
+        for (int i = 0; i < productList.length; i++) {
+            switch (productType) {
+                case 'd':
+                    if (productList[i].getClass().equals(Drinks.class)) {
+                        info = Arrays.copyOf(info, info.length + 1);
+                        info[info.length - 1] = "Id nr: " + productList[i].getProductId() + "-" + productList[i].getName();
+                        System.out.println(info[info.length - 1]);
+                    }
+                    break;
+
+                case 'n':
+                    if (productList[i].getClass().equals(Nuts.class)) {
+                        info = Arrays.copyOf(info, info.length + 1);
+                        info[info.length - 1] = "Id nr: " + productList[i].getProductId() + "-" + productList[i].getName();
+                        System.out.println(info[info.length - 1]);
+                    }
+                    break;
+
+                case 'c':
+                    if (productList[i].getClass().equals(ChocolateBars.class)) {
+                        info = Arrays.copyOf(info, info.length + 1);
+                        info[info.length - 1] = "Id nr: " + productList[i].getProductId() + "-" + productList[i].getName();
+                        System.out.println(info[info.length - 1]);
+                    }
+                    break;
+
+                default:
+                    return null;
+            }
+        }
+        return info;
+    }
+
+    public enum DENOMINATIONS {
+        ENKRONA, TVAKRONA, FEMMA, TIA,
+        TJUGA, FEMTILAPP, HUNDRING, TVAHUNDRING, FEMHUNDRING, TUSENLAPP
     }
 }

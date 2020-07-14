@@ -11,7 +11,24 @@ import se.lexicon.romeobot.Data.ProductIdSequencer;
 public class DrinksTest extends TestCase {
 
     @Test
-    public void testGetVolume() {
+    public void testIsSugarFree() {
+        // Arrange
+        ProductIdSequencer.reset();
+        // Act
+        Drinks cola33 = new Drinks
+                ("Cola Can", "-Carbonated water, cola flavour, no fat.", 18, 33, 10);
+        boolean before1 = cola33.isSugarFree();
+        int before2 = cola33.getSugarPercent();
+        cola33.setSugarPercent(0);
+        // Assert
+        assertFalse(before1);
+        assertTrue(cola33.isSugarFree());
+        assertEquals(10, before2);
+        assertEquals(0, cola33.getSugarPercent());
+    }
+
+    @Test
+    public void testSetAndGetVolume() {
         // Arrange
         ProductIdSequencer.reset();
         // Act
